@@ -1,0 +1,26 @@
+@mixin theme($name, $font-color){
+	.container.main-color.#{$name}{
+		#footer-wrap{
+			.ui.header,
+			a{
+				color: $font-color;
+			}
+			.copyright{
+				color: $font-color;
+			}
+		}
+	}
+}
+
+@include theme(theme-footer-font-1, $main-color-one);
+@include theme(theme-footer-font-2, $main-color-two);
+@include theme(theme-footer-font-3, $main-color-three);
+@include theme(theme-footer-font-4, $main-color-four);
+@include theme(theme-footer-font-5, $main-color-five);
+@include theme(theme-footer-font-6, $main-color-six);
+@include theme(theme-footer-font-7, $main-color-seven);
+@include theme(theme-footer-font-8, $main-color-eight);
+@include theme(theme-footer-font-9, $main-color-nine);
+@include theme(theme-footer-font-10, $main-color-ten);
+@include theme(theme-footer-font-11, $main-color-eleven);
+@include theme(theme-footer-font-12, $main-color-twelve);

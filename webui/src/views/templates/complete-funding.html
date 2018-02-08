@@ -1,0 +1,146 @@
+<div class="mainbody-wrap" ng-cloak>
+	<div class="background-wrap">
+		<div class="ui page grid">
+			<div class="column">
+
+				<div class="campaign-creation-header">
+					<div class="campaignsteps" ng-include src="'views/templates/partials/campaign/create/campaign-steps.html'"></div>
+
+					<div class="ui blue message" ng-show="direct_transaction">
+						<div class="header" translate>
+							complete_funding_stripe_direct_transaction_enabled
+						</div>
+					</div>
+
+					<div class="ui center aligned basic campaign-top-header segment" ng-show="!campaign.settings.country_bank_form">
+						<h1 class="ui header" translate>complete_funding_main_message</h1>
+						<p translate> complete_funding_main_text </p>
+						<p translate>complete_funding_main_text2</p>
+					</div>
+
+					<div class="ui center aligned basic campaign-top-header segment" ng-show="campaign.settings.country_bank_form">
+						<h1 class="ui header" translate>complete_funding_main_message</h1>
+						<p translate>complete_funding_bank_main_text</p>
+						<p translate>complete_funding_main_text2</p>
+					</div>
+				</div>
+				<!-- campaign-creation-header end -->
+
+
+				<form class="campaign-creation-form startfunding-form ui form" name="startfunding-form">
+
+					<h2 class="ui inverted top attached header" translate> complete_funding_fundingdetails </h2>
+					<div class="campaign-bg ui middle attached basic segment">
+						<div class="formbg ui two column stackable grid" ng-if="!campaign.settings.country_bank_form">
+							<div class="ui corner red label" data-content="Required Field" sui-popup>
+								<i class="white asterisk icon"></i>
+							</div>
+							<div class="five wide column">
+								<h3 class="ui header"><span translate>complete_funding_stripe_connection</span> <span class="required-text" translate="campaign_creation_required_text"></span></h3>
+								<p translate>
+									complete_funding_stripe_connect_notes
+								</p>
+							</div>
+							<!-- column end -->
+
+							<div class="eleven wide column">
+								<div ng-show="stripeConnected" class="field">
+									<h4 class="ui black header" translate>complete_funding_stripe_message</h4>
+									<div class="ui selection fluid dropdown" ng-model="campaign.stripe_account_id">
+										<input type="hidden" name="stripe_account">
+										<div class="default text">{{'complete_funding_stripe_default'|translate}} </div>
+										<i class="dropdown icon"></i>
+										<div class="menu">
+											<div class="item" data-value="{{account.stripe_account_id}}" ng-repeat="account in stripeAccounts" ng-click="selectStripeId(account.id)">
+												<a class="ui green label" ng-show="account.access_token.indexOf('live') > -1">Live Account</a>
+												<a class="ui yellow label" ng-show="account.access_token.indexOf('test') > -1">Test Account</a> {{account.email}}
+												({{account.publishable_key}})
+											</div>
+										</div>
+									</div>
+								</div>
+								<h4 class="stripe-connect-header ui black header" translate ng-show="stripeConnected">complete_funding_stripe_message1</h4>
+
+								<h4 class="stripe-connect-header ui header" ng-hide="stripeConnected" translate>complete_funding_stripe_message2</h4>
+								<a ng-click="setRedirectUrl()" class="stripe-connect" id="stripeconnect"><span  translate> complete_funding_stripe_button</span></a>
+
+							</div>
+							<!-- column end -->
+						</div>
+						<div class="formbg ui two column stackable grid" ng-if="campaign.settings.country_bank_form">
+							<div class="ui corner red label" data-content="Required Field" sui-popup>
+								<i class="white asterisk icon"></i>
+							</div>
+							<div class="five wide column">
+								<h3 class="ui header"><span translate>complete_funding_bank_header</span> <span class="required-text" translate="campaign_creation_required_text"></span></h3>
+								<p translate>
+									complete_funding_bank_note
+								</p>
+							</div>
+							<!-- column end -->
+
+							<div class="eleven wide column">
+								<div class="ui form bank-form">
+									<div class="fields">
+										<div class="row">
+												<div class="six wide field">
+														<label translate>complete_funding_bank_beneficiary</label>
+														<input name="bank_beneficiary" type="text" placeholder="{{'complete_funding_bank_beneficiary_placeholder' | translate}}" ng-model="bank.beneficiary_name">
+												</div>
+										</div>
+										<div class="row">
+												<div class="six wide field">
+														<label translate>complete_funding_bank_cpf</label>
+														<input name="bank_cpf" type="text" placeholder="{{'complete_funding_bank_cpf_placeholder'| translate}} " ng-model="bank.cpf">
+												</div>
+										</div>
+										<div class="row">
+												<div class=" six wide field">
+														<label translate>complete_funding_bank_name</label>
+														<input name="bank_name" type="text" placeholder="{{'complete_funding_bank_name_placeholder' | translate}}" ng-model="bank.bank_name">
+												</div>
+										</div>
+										<div class="row">
+												<div class=" six wide field">
+														<label translate>complete_funding_bank_code</label>
+														<input name="bank_code" type="text" placeholder="{{'complete_funding_bank_code_placeholder' | translate}}" ng-model="bank.bank_code">
+												</div>
+										</div>
+										<div class="row">
+												<div class=" six wide field">
+														<label translate>complete_funding_bank_branch</label>
+														<input name="bank_branch" type="text" placeholder="{{'complete_funding_bank_branch_placeholder' | translate}}" ng-model="bank.branch_code">
+												</div>
+										</div>
+										<div class="row">
+												<div class=" six wide field">
+														<label translate>complete_funding_bank_account</label>
+														<input name="bank_account" type="text" placeholder="{{'complete_funding_bank_account_placeholder' | translate}}" ng-model="bank.account_number">
+												</div>
+										</div>
+										<div class="row">
+												<div class=" six wide field">
+														<label translate>complete_funding_bank_account_confirm</label>
+														<input name="bank_account_confirm" type="text" placeholder="{{'complete_funding_bank_account_confirm_placeholder' | translate}}" ng-model="bank.account_number_confirm">
+												</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- column end -->
+						</div>
+						<!-- formbg end -->
+					</div>
+					<div ng-include src="'views/templates/partials/response-message.html'"></div>
+					<div class="bottom-btn-wrap right aligned column" ng-include src="'views/templates/partials/campaign/create/campaign-save.html'"></div>
+
+				</form>
+				<!-- campaign-creation-form end -->
+			</div>
+			<!-- column end -->
+		</div>
+		<!-- ui page grid end -->
+	</div>
+	<!-- background-wrap end -->
+</div>
+<!-- mainbody-wrap end -->

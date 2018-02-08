@@ -1,0 +1,35 @@
+{
+    "campaign_review_header":"Campaign Review",
+    "campaign_review_text":"You can add review notes below by clicking on a selected field. Review notes indicate to the campaign manager what needs to be corrected in order for a campaign to become approved.",
+    "campaign_review_notes":"Notes",
+    "campaign_review_website":"Website Links",
+    "campaign_review_contact":"Contact",
+    "campaign_review_campaign":"Campaign",
+    "campaign_review_faq":"FAQ",
+    "campaign_review_desc":"This campaign does not have a description.",
+    "campaign_review_disapprove":"Disapprove Campaign",
+    "campaign_review_approve":"Approve Campaign",
+    "campaign_review_projectnote":" Notes for project",
+    "campaign_review_save":"Save Note",
+    "campaign_review_cancel":"Cancel",
+    "PledgeSection_KeepAll":"Keep It All",
+    "PledgeSection_AllNothing":"All or Nothing",
+    "PledgeSection_raiseMode":"Raise Mode",
+    "funding_goal":"Funding Goal",
+    "PledgeSection_backers":"Backer",
+    "PledgeSection_raisedOf":"Raised In",
+    "PledgeSection_goal":"Goal",
+    "PledgeSection_funded":"Funded Of",
+    "PledgeSection_Contribute":"Contribute",
+    "PledgeSection_Contribute_withMinimum":"with a minimun of ",
+    "PledgeSection_Contribute_Rewards":"Contribute For Rewards",
+    "PledgeSection_Or":"Or",
+    "PledgeSection_SoldOut":"Sold Out",
+    "PledgeSection_Nobackers":"No Backer",
+    "PledgeSection_Limitedrewards":"Limited Rewards",
+    "PledgeSection_LeftOf":"Left Off",
+    "PledgeSection_EstimatedShip":"Estimate Shipping"
+
+
+
+}

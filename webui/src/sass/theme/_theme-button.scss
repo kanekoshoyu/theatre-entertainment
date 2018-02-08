@@ -1,0 +1,65 @@
+@mixin theme($name, $main-color, $link-color, $main-color-hover){
+	.container.main-color.#{$name}{
+		.collapsible-settings {
+			i#m-user-settings {
+				background-color: $main-color;
+			}
+		}
+		#login, #register{
+			button{
+				background-color: $main-color;
+				color:#ffffff;
+				&:hover{
+					background-color: $main-color-hover;
+				}
+			}
+		}
+    .sidebar-heading,
+    .main-block-heading {
+      background-color: $main-color;
+      border-color: $main-color;
+    }
+		.masthead-button{
+			background-color: $main-color;
+			color:#ffffff;
+		}
+		.view-more-btn {
+			background-color: $main-color;
+			color:#ffffff;
+		}
+
+		.start-button {
+			background-color: $main-color;
+			color:#ffffff;
+		}
+
+		#learnmore-wrap{
+			.ui.button{
+				background-color: $main-color;
+				color:#ffffff;
+			}
+		}
+		.contribute-button{
+			background-color: $main-color;
+			color: #fff;
+			.ui.label{
+				color: #fff;
+				font-weight: bold;
+			}
+			
+		}
+	}
+}
+
+@include theme(theme-button-1, $main-color-one, $main-color-one, $main-color-one-hover);
+@include theme(theme-button-2, $main-color-two, $main-color-two, $main-color-two-hover);
+@include theme(theme-button-3, $main-color-three, $main-color-three, $main-color-three-hover);
+@include theme(theme-button-4, $main-color-four, $main-color-four, $main-color-four-hover);
+@include theme(theme-button-5, $main-color-five, $main-color-five, $main-color-five-hover);
+@include theme(theme-button-6, $main-color-six, $main-color-six, $main-color-six-hover);
+@include theme(theme-button-7, $main-color-seven, $main-color-seven, $main-color-seven-hover);
+@include theme(theme-button-8, $main-color-eight, $main-color-eight, $main-color-eight-hover);
+@include theme(theme-button-9, $main-color-nine, $main-color-nine, $main-color-nine-hover);
+@include theme(theme-button-10, $main-color-ten, $main-color-ten, $main-color-ten-hover);
+@include theme(theme-button-11, $main-color-eleven, $main-color-eleven, $main-color-eleven-hover);
+@include theme(theme-button-12, $main-color-twelve, $main-color-twelve, $main-color-twelve-hover);

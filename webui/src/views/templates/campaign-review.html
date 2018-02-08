@@ -1,0 +1,219 @@
+<div class="mainbody-wrap" ng-cloak>
+  <div class="background-wrap" id="campaign-review">
+    <div class="ui page grid">
+      <div class="column">
+        <div class="campaign-review-header ui center aligned basic segment">
+          <h1 class="ui header" translate> campaign_review_header <i class="edit icon right"></i></h1>
+          <p translate> campaign_review_text </p>
+        </div>
+
+        <div class="campaign-top-header ui two column stackable grid">
+          <div class="nine wide column left-column">
+            <div ng-if="note.name" class="ui label notes-label" translate>campaign_review_notes
+              <i class="delete icon" ng-click="removeNote('name')" ng-if="note.name"></i>
+            </div>
+            <div class="notes" ng-class="{'has-note ui basic segment' : note.name}" title="Campaign Title" ng-click="addNotes('name')">
+              <h1 class="ui header">{{campaign.name}}</h1>
+            </div>
+
+            <div ng-if="note.blurb" class="ui label notes-label" translate>campaign_review_notes
+              <i class="delete icon" ng-click="removeNote('blurb')" ng-if="note.blurb"></i>
+            </div>
+            <div class="notes" ng-class="{'has-note ui basic segment' : note.blurb, 'field-empty': !campaign.blurb}" title="Campaign Blurb" ng-click="addNotes('blurb')">
+              <p> {{campaign.blurb}}</p>
+            </div>
+
+            <div ng-show="campaign.cities" class="ui campaign-link list">
+              <div class="item">
+                <i class="map marker icon"></i><a ng-repeat="city in campaign.cities" ng-href="explore?location={{city.id}}" class="city-link">{{city.city_full}}{{$last ? '' : ', '}}</a>
+              </div>
+            </div>
+            <div ng-show="campaign.categories" class="ui campaign-link list">
+              <div class="item">
+                <i class="tags icon"></i><a ng-repeat="category in campaign.categories" ng-href="explore?category={{category.id}}" class="category-link">{{category.name}}{{$last ? '' : ', '}} </a>
+              </div>
+            </div>
+            <div class="campaign-top-header-image" ng-if="campaign.files.length">
+              <a ng-if="campaign.settings.top_header_link" ng-href="{{campaign.settings.top_header_link}}">
+                <img ng-repeat="file in campaign.files | filter:{region_id: RESOURCE_REGIONS.campaign.top_header} | orderBy:'-file_id' | limitTo: 1" ng-src="{{server + '/image/campaign_top_header_image/' + file.path_external}}" class="ui image" />
+              </a>
+              <img ng-if="!campaign.settings.top_header_link" ng-repeat="file in campaign.files | filter:{region_id: RESOURCE_REGIONS.campaign.top_header} | orderBy:'-file_id' | limitTo: 1" ng-src="{{server + '/image/campaign_top_header_image/' + file.path_external}}"
+                class="ui image" />
+            </div>
+          </div>
+          <!-- COLUMN END -->
+          <div class="right-col seven wide column" ng-repeat="manager in campaign.managers">
+            <div ng-if="note.managers" class="ui label notes-label" translate>campaign_review_notes
+              <i class="delete icon" ng-click="removeNote('managers')" ng-if="note.managers"></i>
+            </div>
+            <div class="notes" ng-class="{'has-note ui basic segment' : note.managers}" title="Campaign Profile" ng-click="addNotes('managers')">
+              <div class="campaign-user ui two column stackable grid">
+                <div class="user-info-col ten wide column">
+                  <h2 class="ui campaign-user-name header">{{manager.first_name + ' ' + manager.last_name}}</h2>
+                  <p ng-show="!public_settings.site_campaign_enable_campaign_bio">{{manager.bio}}</p>
+                  <p ng-show="public_settings.site_campaign_enable_campaign_bio">{{campaign.settings.bio_enable}}</p>
+                  <div class="campaign-user-links">
+                    <h4 class="site-link-title ui header" translate><i class="globe icon"></i> campaign_review_website </h4>
+                    <div class="ui divided vertical list">
+                      <div class="item" ng-repeat="website in manager.person_websites">
+                        <a href="{{website.uri}}" target="_blank" class="site-link text-link">{{website.uri_text}}</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- column end -->
+
+                <div class="user-img-col center aligned six wide column">
+                  <div class="user-img-wrap">
+                    <img class="ui circular image pp_placeholder" ng-hide="manager.person_files[0]" src="images/placeholder-images/placeholder_profile_photo.png" ng-click="showManager()">
+                    <img ng-if="manager.person_files[0]" ng-src="{{server + '/image/campaign_profile/' + manager.person_files[0].path_external}}" class="ui circular image" id="campaign-user-pic" ng-click="showManager()">
+                  </div>
+                  <div class="contact-btn ui button" translate> campaign_review_contact </div>
+                </div>
+                <!-- column end -->
+              </div>
+              <!-- campaign-user end -->
+            </div>
+          </div>
+          <!-- COLUMN END -->
+        </div>
+        <!-- HEADER GRID -->
+        <div id="campaign-tabs">
+          <div class="menu-tabs ui top attached pointing secondary menu">
+            <a class="item active" data-tab="campaign" translate> campaign_review_campaign</a>
+            <a class="item" data-tab="faq" translate> campaign_review_faq</a>
+          </div>
+          <div class="ui middle attached tab segment active" data-tab="campaign">
+            <div class="campaign-info ui two column stackable grid">
+              <div class="left-col ten wide column">
+                <div class="img-wrap campaign-image">
+                  <div ng-if="note.files" class="ui label notes-label" translate>campaign_review_notes
+                    <i class="delete icon" ng-click="removeNote('files')" ng-if="note.files"></i>
+                  </div>
+                  <!-- notes-label end -->
+                  <div class="notes" ng-class="{'has-note ui basic segment' : note.files, 'field-empty': !campaign.files.length}" title="Campaign Image" ng-click="addNotes('files')">
+                    <embed-video ng-if="campaign.video && campaign.video_type != 'custom'" class="campaign-video" ng-href="{{campaign.video}}"></embed-video>
+                    <video ng-if="campaign.video && campaign.video_type == 'custom'" style="width:100%;height:100%;background:#000000;" id="custom-video-player" controls>
+											<source ng-src="{{campaign.video}}"></source>
+										</video>
+                    <img ng-hide="campaign.video" ng-if="campaign.files.length" ng-repeat="file in campaign.files | filter:{region_id: RESOURCE_REGIONS.campaign.thumbnail} | orderBy:'-file_id' | limitTo: 1" ng-src="{{server + '/image/campaign_detail_large/' + file.path_external}}"
+                      class="ui image" />
+                    <img ng-hide="campaign.video" ng-if="noMainImage" src="images/placeholder-images/placeholder_campaign.png" class="ui image" />
+                  </div>
+                </div>
+                <!-- CAMPAIGN IMAGE END -->
+
+                <!-- AddToAny BEGIN -->
+                <div id="sm-share-wrap">
+                  <div class="a2a_kit a2a_kit_size_32 a2a_default_style social-media-share">
+                    <a class="a2a_button_facebook"></a>
+                    <a class="a2a_button_twitter"></a>
+                    <a class="a2a_button_email"></a>
+                    <a class="a2a_button_google_plus"></a>
+                    <a class="a2a_dd" href="https://www.addtoany.com/share_save"></a>
+                  </div>
+                </div>
+                <!-- AddToAny END -->
+
+
+                <div ng-show="campaign.campaign_links.length" class="ui basic center aligned segment campaign-links-wrap">
+                  <div ng-if="note.links" class="ui label notes-label" translate>campaign_review_notes
+                    <i class="delete icon" ng-click="removeNote('links')" ng-if="note.links"></i>
+                  </div>
+                  <div class="notes" ng-class="{'has-note ui basic segment' : note.links}" title="Campaign Links" ng-click="addNotes('links')">
+                    <!-- <div class="link-heading"> Other Links: </div> -->
+                    <div class="ui bulleted horizontal list campaign-links">
+                      <a class="item" ng-repeat="link in campaign.campaign_links | limitTo: 5" ng-href="{{link.uri}}" target="_blank"><span ng-if="link.uri_text">{{link.uri_text}}</span><span ng-if="!link.uri_text">{{link.uri}}</span></a>
+                    </div>
+                  </div>
+                </div>
+                <!-- SEGMENT END -->
+
+                <div ng-if="note.description" class="ui label notes-label" translate>campaign_review_notes
+                  <i class="delete icon" ng-click="removeNote('description')" ng-if="note.description"></i>
+                </div>
+                <div class="notes" ng-class="{'has-note ui basic segment' : note.description, 'field-empty': !campaign.description}" title="Campaign Description" ng-click="addNotes('description')">
+                  <div ng-show="campaign.description" class="campaign-story">
+                    <div html-render html="campaign.description" class="fr-view"></div>
+                  </div>
+
+                  <div ng-if="noDescription" class="ui warning message">
+                    <div class="header" translate>
+                      campaign_review_desc
+                    </div>
+                  </div>
+                </div>
+                <!-- notes end -->
+              </div>
+              <!-- COLUMN END -->
+              <div class="right-col six wide column" ng-include src="'views/templates/partials/campaign/review/pledge-section.html'"></div>
+            </div>
+          </div>
+          <div class="ui middle attached tab segment" data-tab="faq">
+            <div class="ui campaign-info segment">
+              <div class="ui two column stackable grid">
+                <div class="left floated ten wide column">
+                  <div ng-if="note.faqs" class="ui label notes-label" translate>campaign_review_notes
+                    <i class="delete icon" ng-click="removeNote('faqs')" ng-if="note.faqs"></i>
+                  </div>
+                  <div class="notes" ng-class="{'has-note ui basic segment' : note.faqs}" title="Campaign FAQs" ng-click="addNotes('faqs')">
+                    <div class="faq-info" ng-repeat="faq in faqs">
+                      <span>{{faq.name}}</span><span ng-if="faq.description">{{ " - " + faq.description}}</span>
+                      <div ng-repeat="pair in faq.faq_pairs">
+                        <div class="faq-pair">
+                          <p class="question" ng-class="{closed: !expand}" ng-click="expand = !expand">{{pair.question}}</p>
+                          <p ng-show="expand" class="answer">{{pair.answer}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- COLUMN END -->
+                <div class="six wide column" ng-include src="'views/templates/partials/campaign/review/pledge-section.html'"></div>
+              </div>
+              <!-- TWO COLUMN GRID END -->
+            </div>
+            <!-- CAMPAIGN-INFO SEGMENT END -->
+          </div>
+          <!-- CAMPAIGN-INFO END -->
+        </div>
+        <!-- campaign-tabs end -->
+
+        <div class="ui right aligned basic btn nxt-step segment">
+          <button accessible-form ng-click="action('disapprove')" class="ui red button" style="margin-right:20px;" translate> campaign_review_disapprove </button>
+          <button accessible-form ng-click="action('approve')" class="ui green button" translate> campaign_review_approve </button>
+        </div>
+        <div ng-include src="'views/templates/partials/response-message.html'"></div>
+      </div>
+      <!-- column end -->
+    </div>
+    <!-- ui page grid end -->
+  </div>
+  <!-- background-wrap end -->
+</div>
+<!-- mainbody-wrap end -->
+
+
+
+<!-- modal -->
+<div class="ui modal admin-notes">
+  <i class="close icon"></i>
+  <div class="header">
+    {{'campaign_review_projectnote' |translate}} {{noteFieldName}}
+  </div>
+  <div class="content">
+    <div class="ui reply form">
+      <div class="field">
+        <textarea ng-model="note[noteFieldName]"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui red button" translate>
+      campaign_review_cancel
+    </div>
+    <div class="ui green button" ng-click="saveNote()" translate>
+      campaign_review_save
+    </div>
+  </div>
+</div>

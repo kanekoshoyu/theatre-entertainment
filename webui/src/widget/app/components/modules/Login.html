@@ -1,0 +1,25 @@
+<div id="login-form" class="ui large form">
+  <div class="two fields">
+    <div class="field">
+      <div class="ui left icon input">
+        <input type="email" name="Email" (keypress)="onLogIn($event)" placeholder="{{translate('campaign_login_email_placeholder')}}" [(ngModel)]="loginEmail">
+        <i class="mail icon"></i>
+      </div>
+    </div>
+    <div class="field">
+      <div class="ui left icon input">
+        <input type="password" name="Password" (keypress)="onLogIn($event)" placeholder="{{translate('campaign_login_password_placeholder')}}" [(ngModel)]="loginPassword">
+        <i class="lock icon"></i>
+      </div>
+    </div>
+  </div>
+  <div class="button-wrap">
+    <button type="submit" class="submit-button ui blue large button" ThemeColor (click)="login()">{{isContributePage ? translate('campaign_login_contribute_button') : translate('campaign_login_button')}}</button>
+  </div>
+
+  <div class="ui negative message" *ngIf="!isLoggedInSuccessful">
+    <div class="content">
+      {{logginErrorMessage}}
+    </div>
+  </div>
+</div>

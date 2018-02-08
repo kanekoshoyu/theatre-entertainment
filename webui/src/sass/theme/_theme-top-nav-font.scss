@@ -1,0 +1,38 @@
+@mixin theme($name, $font-color) {
+	.container.main-color.#{$name} {
+		.top-nav-bar {
+			a {
+				color: $font-color;
+			}
+		}
+		#mobile-sidebar {
+			a {
+				color: $font-color;
+			}
+		}
+		.mobile-menu-header {
+			color: $font-color;
+		}
+		.ui.dropdown.collapsible,
+		.user-greeting {
+			color: $font-color;
+		}
+		.collapsible-settings {
+			i.setting {
+				color: $font-color;
+			}
+		}
+	}
+}
+@include theme(theme-top-nav-font-1, $main-color-one);
+@include theme(theme-top-nav-font-2, $main-color-two);
+@include theme(theme-top-nav-font-3, $main-color-three);
+@include theme(theme-top-nav-font-4, $main-color-four);
+@include theme(theme-top-nav-font-5, $main-color-five);
+@include theme(theme-top-nav-font-6, $main-color-six);
+@include theme(theme-top-nav-font-7, $main-color-seven);
+@include theme(theme-top-nav-font-8, $main-color-eight);
+@include theme(theme-top-nav-font-9, $main-color-nine);
+@include theme(theme-top-nav-font-10, $main-color-ten);
+@include theme(theme-top-nav-font-11, $main-color-eleven);
+@include theme(theme-top-nav-font-12, $main-color-twelve);

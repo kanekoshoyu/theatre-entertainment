@@ -1,0 +1,42 @@
+@mixin theme($name, $main-color, $link-color, $main-color-hover, $main-color-table-alter){
+	.container.main-color.#{$name}{
+		/* Reward block ------------------*/
+		.rewards{
+			.pledge-level{
+				> li {
+					&:hover { 
+						background: $main-color !important; 
+						color: $main-color !important; 
+					}	
+				}
+        .choose-reward-btn {
+          background: $main-color!important;
+          color: #fff;
+        }
+				&.ended,
+				&.sold-out {
+					> li {
+						&:hover {
+							background: #f1f1f1 !important;
+							color: #555555 !important;
+							cursor: default !important;
+						}
+					}
+				}	
+			}
+		}
+	}
+}
+
+@include theme(theme-reward-1, $main-color-one, $main-color-one, $main-color-one-hover, $main-color-one-table-alter);
+@include theme(theme-reward-2, $main-color-two, $main-color-two, $main-color-two-hover, $main-color-two-table-alter);
+@include theme(theme-reward-3, $main-color-three, $main-color-three, $main-color-three-hover, $main-color-three-table-alter);
+@include theme(theme-reward-4, $main-color-four, $main-color-four, $main-color-four-hover, $main-color-four-table-alter);
+@include theme(theme-reward-5, $main-color-five, $main-color-five, $main-color-five-hover, $main-color-five-table-alter);
+@include theme(theme-reward-6, $main-color-six, $main-color-six, $main-color-six-hover, $main-color-six-table-alter);
+@include theme(theme-reward-7, $main-color-seven, $main-color-seven, $main-color-seven-hover, $main-color-seven-table-alter);
+@include theme(theme-reward-8, $main-color-eight, $main-color-eight, $main-color-eight-hover, $main-color-eight-table-alter);
+@include theme(theme-reward-9, $main-color-nine, $main-color-nine, $main-color-nine-hover, $main-color-nine-table-alter);
+@include theme(theme-reward-10, $main-color-ten, $main-color-ten, $main-color-ten-hover, $main-color-ten-table-alter);
+@include theme(theme-reward-11, $main-color-eleven, $main-color-eleven, $main-color-eleven-hover, $main-color-eleven-table-alter);
+@include theme(theme-reward-12, $main-color-twelve, $main-color-twelve, $main-color-twelve-hover, $main-color-twelve-table-alter);

@@ -1,0 +1,63 @@
+@mixin theme($name, $main-color, $link-color, $main-color-hover){
+	.container.main-color.#{$name}{
+		#learnmore-wrap {
+			background: $main-color;
+		}
+
+		#socialicons-wrap {
+			.social-link:hover {
+				color: $main-color;
+			}
+		}
+
+		.mainbody-wrap {
+			.background-wrap {
+				.campaignsteps {
+					.setup.column.active {
+						.step-link {
+							background-color: $main-color;
+							color: #fff;
+							border-color: $main-color;
+						}
+					}
+				}
+			}
+		}
+
+		.ui.basic.top-header.segment {
+			background-color: $main-color;
+		}
+		.campaignsteps {
+			.ui.stackable.grid.menu-steps{
+				.setup.column{
+					&:hover:not(.active){
+						.step-link {
+							background-color: $main-color-hover;
+							color: #fff;
+							border-color: $main-color-hover;
+						}
+					}
+				}
+			}
+		}
+		#api-menu {
+			.menu-mainheader {
+				background: $main-color;
+			}
+		}
+	}
+}
+
+
+@include theme(theme-banner-1, $main-color-one, $main-color-one, $main-color-one-step-hover);
+@include theme(theme-banner-2, $main-color-two, $main-color-two, $main-color-two-step-hover);
+@include theme(theme-banner-3, $main-color-three, $main-color-three, $main-color-three-step-hover);
+@include theme(theme-banner-4, $main-color-four, $main-color-four, $main-color-four-step-hover);
+@include theme(theme-banner-5, $main-color-five, $main-color-five, $main-color-five-step-hover);
+@include theme(theme-banner-6, $main-color-six, $main-color-six, $main-color-six-step-hover);
+@include theme(theme-banner-7, $main-color-seven, $main-color-seven, $main-color-seven-step-hover);
+@include theme(theme-banner-8, $main-color-eight, $main-color-eight, $main-color-eight-step-hover);
+@include theme(theme-banner-9, $main-color-nine, $main-color-nine, $main-color-nine-step-hover);
+@include theme(theme-banner-10, $main-color-ten, $main-color-ten, $main-color-ten-step-hover);
+@include theme(theme-banner-11, $main-color-eleven, $main-color-eleven, $main-color-eleven-step-hover);
+@include theme(theme-banner-12, $main-color-twelve, $main-color-twelve, $main-color-twelve-step-hover);

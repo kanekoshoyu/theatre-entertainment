@@ -1,0 +1,114 @@
+<div class="funding-wrap" ng-cloak>
+  <div class="ui funding-info list">
+    <div class="item r-mode">
+      <strong class="c-raise-mode">
+				<div class="ui label black" translate> PreviewPledge_raiseMode </div>
+				<span ng-if="campaign.raise_mode_id == 1" translate> PreviewPledge_AllNothing </span>
+				<span ng-if="campaign.raise_mode_id == 2" translate> PreviewPledge_KeepAll   </span>
+			</strong>
+    </div>
+    <!-- ITEM END -->
+
+    <div class="item">
+      <span class="c-value">{{campaign.backers.length}}</span>
+    </div>
+    <!-- ITEM END -->
+
+    <div class="item item-label" translate>
+      <em class="c-meta"> PreviewPledge_backers </em>
+    </div>
+    <!-- ITEM END -->
+
+    <div class="item" ng-if="campaign.funded_amount != null">
+      <span class="c-value" ng-bind-html="campaign.funded_amount | formatCurrency:campaign.currencies[0].code_iso4217_alpha:public_setting.site_campaign_decimal_option"></span>
+    </div>
+    <!-- ITEM END -->
+
+    <div class="item item-label" translate>
+      <em class="c-meta">  PreviewPledge_raisedOf  <span ng-if="campaign.funding_goal" ng-bind-html="campaign.funding_goal | formatCurrency:campaign.currencies[0].code_iso4217_alpha:public_setting.site_campaign_decimal_option"></span>  {{'PreviewPledge_goal' | translate }} </em>
+    </div>
+    <!-- ITEM END -->
+
+    <div class="bar-progress ui indicating progress" data-percent="{{temp = campaign.funded_amount / (campaign.funding_goal || 1) * 100; temp >= 100 ? 100 : temp < 1 ? 0 : temp}}">
+      <div class="bar"></div>
+    </div>
+
+    <div class="item">
+      <span class="c-value"> {{campaign.funded_amount / (campaign.funding_goal || 1) * 100 | number:0}}% </span>
+    </div>
+    <!-- ITEM END -->
+
+    <div class="item item-label" translate>
+      <em class="c-meta"> PreviewPledge_funded </em>
+    </div>
+    <!-- ITEM END -->
+
+    <div ng-show="campaign.runtime_days" class="f-runtime">
+      <!-- If it's not an ongoing campaign -->
+      <div class="item">
+        <span class="c-value" ng-class="{'time-closed' : dateInPast(campaign.ends)}" am-time-ago="campaign.ends"></span>
+      </div>
+      <div class="item f-duration">
+        <div ng-if="!dateInPast(campaign.ends)"> {{'PreviewPledge_CamaignMessage' | translate }} {{campaign.created | formatDate:"MMM DD YYYY"}} {{'PreviewPledge_CamaignMessage1' | translate }} {{campaign.ends | formatDate:"MMMM DD YYYY"}}. </div>
+        <div class="closed-msg" ng-if="dateInPast(campaign.ends)"> {{'PreviewPledge_Camaign_Notavailable' | translate }} </div>
+      </div>
+    </div>
+    <!-- FUNDING RUN TIME END -->
+  </div>
+  <!-- LIST END -->
+
+  <!-- start funding button disable button is campaign is ended or campaign is not in approved status-->
+
+  <a class="fluid ui massive button contribute-button" ng-class="{'disabled': dateInPast(campaign.ends)}" translate> PreviewPledge_Contribute
+		<div class="ui label" style="background: none;" translate> PreviewPledge_Contribute_withMinimum</div>
+	</a>
+  <!-- Show only if campaign is active -->
+
+  <div class="ui horizontal divider campaign-divider" ng-show="campaign.pledges" translate>
+    PreviewPledge_Or
+  </div>
+  <!-- end of button -->
+
+  <!-- pledge awards -->
+  <ul ng-show="campaign.pledges" class="rewards">
+    <h3 class="ui inverted top attached header center aligned" translate> PreviewPledge_Contribute_Rewards </h3>
+    <a ng-repeat="pledge in campaign.pledges | orderBy:'amount'" class="pledge-level" ng-class="{'ended': dateInPast(campaign.ends), 'sold-out': pledge.total_pledges == pledge.item_limit}">
+      <li class="bonus-1">
+        <div class="ui basic segment">
+          <div class="ui basic dimmable dimmed segment reward-bg-wrap">
+            <div class="ui inverted simple dimmer" ng-if="pledge.total_pledges == pledge.item_limit">
+              <div class="content">
+                <div class="center">
+                  <h2 class="ui icon header" translate>
+                    <i class="emphasized frown icon"></i> PreviewPledge_SoldOut
+                  </h2>
+                </div>
+              </div>
+            </div>
+            <div class="reward-amount">
+              <span ng-bind-html="pledge.amount | formatCurrency:campaign.currencies[0].code_iso4217_alpha:public_setting.site_campaign_decimal_option"></span>
+              <span class="currency"> {{campaign.currencies[0].code_iso4217_alpha}}</span>
+            </div>
+            <h4 class="ui header"> {{pledge.name}}</h4>
+            <p class="reward-desc">{{pledge.description}}</p>
+            <div class="bottom">
+              <div class="reward-backers" ng-if="pledge.total_backers>0">
+                <i class="community basic icon"></i>
+                <span class="backer-number"> {{pledge.total_backers}} </span>
+                <span> {{'PreviewPledge_backers' | translate }} <span ng-if="pledge.total_backers>1">s</span></span>
+              </div>
+
+              <div class="reward-backers" ng-if="pledge.total_backers == 0"><i class="community basic icon"></i> {{'PreviewPledge_Nobackers' | translate }} </div>
+              <div class="limit" ng-if="pledge.item_limit != null"> {{'PreviewPledge_Limitedrewards' | translate }} {{pledge.item_limit - pledge.total_pledges}} {{'PreviewPledge_LeftOf' | translate }} {{pledge.item_limit}}</div>
+              <div class="reward-etd" ng-if="pledge.estimated_delivery_time" translate> PreviewPledge_EstimatedShip
+                <span class="f-delivery-date">{{pledge.estimated_delivery_time | formatDate:"MMMM YYYY"}} </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </a>
+  </ul>
+
+</div>
+<!-- end of awards-->

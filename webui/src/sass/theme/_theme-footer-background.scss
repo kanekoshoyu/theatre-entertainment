@@ -1,0 +1,20 @@
+@mixin theme($name, $background-color, $hover-color){
+	.container.main-color.#{$name}{
+		#footer-wrap{
+			background-color: $background-color;
+		}
+	}
+}
+
+@include theme(theme-footer-background-1, $main-color-one, $main-color-one-hover);
+@include theme(theme-footer-background-2, $main-color-two, $main-color-two-hover);
+@include theme(theme-footer-background-3, $main-color-three, $main-color-three-hover);
+@include theme(theme-footer-background-4, $main-color-four, $main-color-four-hover);
+@include theme(theme-footer-background-5, $main-color-five, $main-color-five-hover);
+@include theme(theme-footer-background-6, $main-color-six, $main-color-six-hover);
+@include theme(theme-footer-background-7, $main-color-seven, $main-color-seven-hover);
+@include theme(theme-footer-background-8, $main-color-eight, $main-color-eight-hover);
+@include theme(theme-footer-background-9, $main-color-nine, $main-color-nine-hover);
+@include theme(theme-footer-background-10, $main-color-ten, $main-color-ten-hover);
+@include theme(theme-footer-background-11, $main-color-eleven, $main-color-eleven-hover);
+@include theme(theme-footer-background-12, $main-color-twelve, $main-color-twelve-hover);

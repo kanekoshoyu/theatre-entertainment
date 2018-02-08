@@ -1,0 +1,205 @@
+@mixin theme($name, $main-color, $link-color, $main-color-hover){
+	.container.main-color.#{$name}{
+		a.text-link {
+			color: $main-color !important;
+			&:hover {
+				opacity: 0.8;
+			}
+		}
+		#faq {
+			.faq-header {
+				h2 {
+					color: $main-color !important;
+				}
+			}
+		}
+		.campaign-top-header {
+			.campaign-description {
+				.campaign-link {
+					.item-wrap {
+						.city-link {
+							color: $main-color !important;
+						}
+					}
+				}
+			}
+		}
+		.text-setting-column{
+			h4.ui.header{
+				color: $main-color;
+			}
+		}
+
+		.front-campaign-list {
+			.campaign-section-title {
+				.icon { 
+					color: $main-color;
+				}
+			}
+		}
+
+		.funding-wrap {
+			.ui.funding-info.list{
+				.item{
+					span.c-value{
+						color: $main-color !important;
+					}
+				}
+			}
+		}
+		
+		.reward-wrap{
+			.reward-header{
+				.reward-amount{
+					.amount{
+						color: $main-color !important;
+					}
+				}
+			}
+		}
+
+		.payment-total{
+			.payment-row{
+				color: $main-color !important;
+			}
+		}
+		
+		.profile-tab-content, .account-tab-content, .pledge-campaign-info{
+			h3.ui.header{
+				color: $main-color;
+			}
+		}
+
+		.reward-information{
+			.reward-header{
+				.right-col{
+					.reward-value{
+						color: $main-color !important;
+					}
+				}
+			}
+			.your-contrib{
+				.contrib-amnt{
+					color: $main-color;
+				}
+			}
+		}
+
+		#footer-wrap {
+			.header {
+				color: $main-color; 
+			}
+		}
+
+		/* Sidebar Menu List ------------------*/
+		.ui.vertical.menu.project-sidebar-list {
+			.header.item {
+				background: $main-color;
+				color: #fff;
+			}
+		}
+
+		/* BOOTSTRAP TABS */
+		.nav-tabs{
+			li {
+				&.active{
+					z-index: 500;
+					border-bottom:4px solid $main-color;
+					a {
+						color: $main-color;
+					}
+					tab-heading{
+						span.backer-number{
+							background-color: $main-color;
+						}
+					}
+				}
+			}
+		}
+
+		.mainbody-wrap {
+			.explore-page {
+				.ui.explore.breadcrumb {
+					a{
+						color: $main-color;
+					}
+				}
+			}
+		}
+
+		.mainbody-wrap {
+			.ui.basic.background-wrap.segment {
+				.ui.campaign-link.list {
+					.item {
+						.category-link,
+						.city-link {
+							color: $main-color;
+						}
+						.category-link:hover,
+						.city-link:hover {
+							color: $main-color;
+							text-decoration: underline;
+						}
+					}
+					.list {
+						padding: 0;
+						color: $main-color;
+					}
+				}
+			}
+		}
+
+		#login, #register{
+			h3{
+				color:$main-color;
+			}
+		}
+
+		form{
+			&[name="campaign_form"], &[name="profile_edit"], &[name="startfunding-form"]{
+				h3{
+					color:$main-color !important;
+				}
+			}
+		}
+
+		.site-setting-content{
+			h3{
+				color:$main-color;
+			}
+		}
+
+		.mainbody-wrap {
+			.ui.basic.background-wrap.segment {
+				.ui.basic.campaign-bg.segment{
+					.toggle-preview {
+						color: $main-color;
+					}
+					.eleven.wide.column {
+						.invite-link { 
+							p{
+								color: $main-color;
+							}
+							a:hover {
+								color: $main-color; 
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@include theme(theme-font-1, $main-color-one, $main-color-one, $main-color-one-hover);
+@include theme(theme-font-2, $main-color-two, $main-color-two, $main-color-two-hover);
+@include theme(theme-font-3, $main-color-three, $main-color-three, $main-color-three-hover);
+@include theme(theme-font-4, $main-color-four, $main-color-four, $main-color-four-hover);
+@include theme(theme-font-5, $main-color-five, $main-color-five, $main-color-five-hover);
+@include theme(theme-font-6, $main-color-six, $main-color-six, $main-color-six-hover);
+@include theme(theme-font-7, $main-color-seven, $main-color-seven, $main-color-seven-hover);
+@include theme(theme-font-8, $main-color-eight, $main-color-eight, $main-color-eight-hover);
+@include theme(theme-font-9, $main-color-nine, $main-color-nine, $main-color-nine-hover);
+@include theme(theme-font-10, $main-color-ten, $main-color-ten, $main-color-ten-hover);
+@include theme(theme-font-11, $main-color-eleven, $main-color-eleven, $main-color-eleven-hover);
+@include theme(theme-font-12, $main-color-eleven, $main-color-eleven, $main-color-eleven-hover);
